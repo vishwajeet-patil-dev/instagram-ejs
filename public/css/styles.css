@@ -1,3 +1,15 @@
 body {
   background-color: red;
 }
+.login-page {
+  .container {
+    width: 350px;
+  }
+  .form-box {
+    border: 1px solid var(--border-color);
+    padding: 10px 0;
+    .input-group {
+      margin-bottom: 6px;
+    }
+  }
+}
